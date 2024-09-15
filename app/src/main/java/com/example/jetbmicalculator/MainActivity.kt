@@ -38,28 +38,54 @@ class MainActivity : ComponentActivity() {
                         )
                         Spacer(modifier = Modifier.height(30.dp))
 
-                        Text(
-                            text = "身長(cm)",
-                            color = Color(0xFFF85F6A),
-                            fontWeight = FontWeight.Bold
-                        )
-
-                        // TODO: 現時点ではvalueに空文字セットしているだけなため入力しても変化しない
-                        TextField(
-                            modifier = Modifier.fillMaxWidth(),
+                        PinkLabeledTextField(
                             value = "",
-                            onValueChange = {}, // TODO: コールバックの設定
-                            colors = TextFieldDefaults.textFieldColors(
-                                backgroundColor = Color.Transparent // 背景色を透明にする
-                            ),
-                            placeholder = { Text(text = "170") },
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), // 数字のみ入力可能なキーボードにする
-                            singleLine = true,
+                            onValueChange = {},
+                            label = "身長(cm)",
+                            placeholder = "170"
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+
+                        // 体重
+                        PinkLabeledTextField(
+                            value = "",
+                            onValueChange = {},
+                            label = "体重(kg)",
+                            placeholder = "65"
                         )
                     }
 
                 }
             }
         }
+    }
+}
+
+@Composable
+fun PinkLabeledTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    placeholder: String
+) {
+    Column() {
+        Text(
+            text = label,
+            color = Color(0xFFF85F6A),
+            fontWeight = FontWeight.Bold
+        )
+
+        // TODO: 現時点ではvalueに空文字セットしているだけなため入力しても変化しない
+        TextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = value,
+            onValueChange = onValueChange, // TODO: コールバックの設定
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.Transparent // 背景色を透明にする
+            ),
+            placeholder = { Text(text = placeholder) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), // 数字のみ入力可能なキーボードにする
+            singleLine = true,
+        )
     }
 }
